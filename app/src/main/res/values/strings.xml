@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">SecretLockLibrary</string>
+    <string name="open_settings">Open Settings</string>
+</resources>
