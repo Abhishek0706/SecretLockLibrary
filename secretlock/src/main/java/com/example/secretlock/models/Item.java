@@ -14,6 +14,7 @@ public class Item {
         put("airplanemode_status", "airplane mode");
         put("ring_status", "ring");
         put("vibrate_status", "vibrate");
+        put("gps_status", "location");
 
     }};
 

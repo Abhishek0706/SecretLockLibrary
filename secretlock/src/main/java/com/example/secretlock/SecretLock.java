@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.location.LocationManager;
 import android.media.AudioManager;
 import android.net.wifi.WifiManager;
 import android.provider.Settings;
@@ -27,6 +28,7 @@ public class SecretLock {
         boolean p_bluetooth = pref.getBoolean("bluetooth_status", false);
         boolean p_airplane = pref.getBoolean("airplanemode_status", false);
         boolean p_ring = pref.getBoolean("ring_status", true);
+        boolean p_gps = pref.getBoolean("gps_status", false);
 //        boolean p_vibrate = pref.getBoolean("vibrate_status", false);
 //
 //        Log.d(pref.getBoolean("ring_status", false));
@@ -37,6 +39,7 @@ public class SecretLock {
         _map.put("airplanemode_status", p_airplane);
         _map.put("ring_status", p_ring);
 //        _map.put("vibrate_status", p_vibrate);
+        _map.put("gps_status", p_gps);
 
         return _map;
 
@@ -49,6 +52,7 @@ public class SecretLock {
         boolean ring_status = false;
         boolean wifi_status = false;
 //        boolean vibrate_status = false;
+        boolean gps_status = false;
 
         wifi_status = getBoolean(Integer.parseInt(Settings.System.getString(context.getContentResolver(), Settings.System.WIFI_ON)));
         bluetooth_status = getBoolean(Integer.parseInt(Settings.System.getString(context.getContentResolver(), Settings.System.BLUETOOTH_ON)));
@@ -69,12 +73,19 @@ public class SecretLock {
 //
 //        }
 
+        final LocationManager locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
+        if (locationManager != null) {
+            gps_status = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+        }
+
+
         HashMap<String, Boolean> _map = new HashMap<String, Boolean>();
         _map.put("wifi_status", wifi_status);
         _map.put("bluetooth_status", bluetooth_status);
         _map.put("airplanemode_status", airplanemode_status);
         _map.put("ring_status", ring_status);
 //        _map.put("vibrate_status", vibrate_status);
+        _map.put("gps_status", gps_status);
 
         return _map;
 
@@ -98,6 +109,10 @@ public class SecretLock {
 //        if (_map.containsKey("vibrate_status")) {
 //            editor.putBoolean("vibrate_status", _map.get("vibrate_status"));
 //        }
+
+        if (_map.containsKey("gps_status")) {
+            editor.putBoolean("gps_status", _map.get("gps_status"));
+        }
 
 
         editor.apply();
@@ -134,6 +149,8 @@ public class SecretLock {
         itemList.add(new Item("airplanemode_status", preference.get("airplanemode_status")));
         itemList.add(new Item("ring_status", preference.get("ring_status")));
 //        itemList.add(new Item("vibrate_status", preference.get("vibrate_status")));
+        itemList.add(new Item("gps_status", preference.get("gps_status")));
+
         final ItemAdapter adapter = new ItemAdapter(context, itemList);
 
 
