@@ -29,9 +29,8 @@ public class SecretLock {
         boolean p_airplane = pref.getBoolean("airplanemode_status", false);
         boolean p_ring = pref.getBoolean("ring_status", true);
         boolean p_gps = pref.getBoolean("gps_status", false);
+        boolean p_rotate = pref.getBoolean("rotate_status", false);
 //        boolean p_vibrate = pref.getBoolean("vibrate_status", false);
-//
-//        Log.d(pref.getBoolean("ring_status", false));
 
         HashMap<String, Boolean> _map = new HashMap<String, Boolean>();
         _map.put("wifi_status", p_wifi);
@@ -40,6 +39,7 @@ public class SecretLock {
         _map.put("ring_status", p_ring);
 //        _map.put("vibrate_status", p_vibrate);
         _map.put("gps_status", p_gps);
+        _map.put("rotate_status", p_rotate);
 
         return _map;
 
@@ -53,6 +53,7 @@ public class SecretLock {
         boolean wifi_status = false;
 //        boolean vibrate_status = false;
         boolean gps_status = false;
+        boolean rotate_status = false;
 
         wifi_status = getBoolean(Integer.parseInt(Settings.System.getString(context.getContentResolver(), Settings.System.WIFI_ON)));
         bluetooth_status = getBoolean(Integer.parseInt(Settings.System.getString(context.getContentResolver(), Settings.System.BLUETOOTH_ON)));
@@ -79,6 +80,9 @@ public class SecretLock {
         }
 
 
+        rotate_status = getBoolean(android.provider.Settings.System.getInt(context.getContentResolver(), Settings.System.ACCELEROMETER_ROTATION, 0));
+
+
         HashMap<String, Boolean> _map = new HashMap<String, Boolean>();
         _map.put("wifi_status", wifi_status);
         _map.put("bluetooth_status", bluetooth_status);
@@ -86,6 +90,7 @@ public class SecretLock {
         _map.put("ring_status", ring_status);
 //        _map.put("vibrate_status", vibrate_status);
         _map.put("gps_status", gps_status);
+        _map.put("rotate_status", rotate_status);
 
         return _map;
 
@@ -112,6 +117,9 @@ public class SecretLock {
 
         if (_map.containsKey("gps_status")) {
             editor.putBoolean("gps_status", _map.get("gps_status"));
+        }
+        if (_map.containsKey("rotate_status")) {
+            editor.putBoolean("rotate_status", _map.get("rotate_status"));
         }
 
 
@@ -150,6 +158,7 @@ public class SecretLock {
         itemList.add(new Item("ring_status", preference.get("ring_status")));
 //        itemList.add(new Item("vibrate_status", preference.get("vibrate_status")));
         itemList.add(new Item("gps_status", preference.get("gps_status")));
+        itemList.add(new Item("rotate_status", preference.get("rotate_status")));
 
         final ItemAdapter adapter = new ItemAdapter(context, itemList);
 

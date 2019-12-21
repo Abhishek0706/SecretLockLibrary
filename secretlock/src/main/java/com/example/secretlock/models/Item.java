@@ -15,6 +15,7 @@ public class Item {
         put("ring_status", "ring");
         put("vibrate_status", "vibrate");
         put("gps_status", "location");
+        put("rotate_status", "auto rotate");
 
     }};
 
