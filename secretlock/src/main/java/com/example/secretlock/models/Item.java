@@ -40,6 +40,7 @@ public class Item {
         this.value = value;
     }
 
+    /// Name that will be shown on Alert Dialog
     public String getXmlName() {
         return name_map.get(this.name);
     }
