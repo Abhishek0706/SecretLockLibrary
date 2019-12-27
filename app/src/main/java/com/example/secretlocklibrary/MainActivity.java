@@ -48,6 +48,9 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void run() {
             if (secretLock.getLockValue(getApplicationContext())) {
+
+                /// From here you can go to a new activity if lock is open
+
                 button.setVisibility(View.VISIBLE);
                 textView.setText("Unlocked");
                 ll.setBackgroundColor(Color.BLUE);

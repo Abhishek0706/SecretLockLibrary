@@ -62,6 +62,10 @@ String can be one of the following values.
 | gps_status | false |
 | rotate_status |false |
 
+The default Settings look like this:
+<img src="https://raw.githubusercontent.com/abhishek0706/SecretLockLibrary/master/screenshots/defaultSettings.jpeg" width="200px">
+
+
 #### example:
 ```java
 Hashmap<String,Boolean> myMap = new Hashmap<>();
@@ -69,4 +73,5 @@ myMap.put("wifi_status",true);
 myMap.put("bluetooth_status",true);
 secretLock.setPreferenceValue(YourActivity.this, myMap);
 ```
-
+## Monitering the Lock
+for getting the value of lock every second, you can call `getLockValue()` method using Handler in android. For example refer [here](https://github.com/Abhishek0706/SecretLockLibrary/blob/master/app/src/main/java/com/example/secretlocklibrary/MainActivity.java).
