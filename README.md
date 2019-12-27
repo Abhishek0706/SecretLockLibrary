@@ -63,6 +63,7 @@ String can be one of the following values.
 | rotate_status |false |
 
 The default Settings look like this:
+
 <img src="https://raw.githubusercontent.com/abhishek0706/SecretLockLibrary/master/screenshots/defaultSettings.jpeg" width="200px">
 
 
